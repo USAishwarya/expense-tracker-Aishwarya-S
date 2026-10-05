@@ -104,4 +104,5 @@ All data stays **only in your own browser** (Local Storage) and is never sent to
 ---
 
 ## Author
+**USAishwarya**
 GitHub: [USAishwarya](https://github.com/USAishwarya)
