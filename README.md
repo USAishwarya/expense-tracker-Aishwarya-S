@@ -29,7 +29,7 @@ A clean, responsive **Expense Tracker** web app for recording income and expense
 
 ### Extra touches
 - Categories change depending on the type (for example *Salary* for income, *Food* for expenses).
-- Amounts are formatted in Indian Rupees (₹) using `Intl.NumberFormat`.
+- Amounts are formatted in Indian Rupees (₹).
 - Transactions are sorted with the newest date first.
 - User input is escaped before it is displayed, which prevents HTML injection.
 - Corrupted or unavailable Local Storage is handled without crashing the app.
@@ -72,7 +72,7 @@ Then open `http://localhost:8000` in your browser.
 ## Project Structure
 
 ```
-expense-tracker-YOUR-NAME/
+expense-tracker-Aishwarya-S/
 ├── index.html   # Page structure and markup
 ├── style.css    # Styling and responsive layout
 ├── script.js    # App logic: transactions, validation, filters, Local Storage, chart
@@ -104,6 +104,4 @@ All data stays **only in your own browser** (Local Storage) and is never sent to
 ---
 
 ## Author
-
-**YOUR NAME**
 GitHub: [USAishwarya](https://github.com/USAishwarya)
