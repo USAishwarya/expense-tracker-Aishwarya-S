@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A simple Expense Tracker to manage income and expenses." />
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="container">
+      <h1>💰 Expense Tracker</h1>
+      <p class="tagline">Track your income and expenses in one place</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Totals -->
+    <section class="cards" aria-label="Summary">
+      <div class="card card-income">
+        <span class="card-label">Total Income</span>
+        <span class="card-value" id="totalIncome">₹0.00</span>
+      </div>
+      <div class="card card-expense">
+        <span class="card-label">Total Expenses</span>
+        <span class="card-value" id="totalExpense">₹0.00</span>
+      </div>
+      <div class="card card-balance">
+        <span class="card-label">Current Balance</span>
+        <span class="card-value" id="balance">₹0.00</span>
+      </div>
+    </section>
+
+    <div class="layout">
+      <!-- Form -->
+      <section class="panel" aria-labelledby="formTitle">
+        <h2 id="formTitle">Add Transaction</h2>
+        <form id="transactionForm" novalidate>
+          <input type="hidden" id="editId" />
+
+          <div class="field">
+            <span class="field-label">Type</span>
+            <div class="type-toggle" role="radiogroup" aria-label="Transaction type">
+              <label class="type-option">
+                <input type="radio" name="type" value="expense" checked />
+                <span>Expense</span>
+              </label>
+              <label class="type-option">
+                <input type="radio" name="type" value="income" />
+                <span>Income</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="amount">Amount (₹)</label>
+            <input type="number" id="amount" min="0" step="0.01" placeholder="e.g. 450.00" inputmode="decimal" />
+            <small class="error" id="amountError"></small>
+          </div>
+
+          <div class="field">
+            <label for="category">Category</label>
+            <select id="category"></select>
+            <small class="error" id="categoryError"></small>
+          </div>
+
+          <div class="field">
+            <label for="date">Date</label>
+            <input type="date" id="date" />
+            <small class="error" id="dateError"></small>
+          </div>
+
+          <div class="field">
+            <label for="description">Description</label>
+            <input type="text" id="description" maxlength="100" placeholder="e.g. Lunch with friends" />
+            <small class="error" id="descriptionError"></small>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submitBtn">Add Transaction</button>
+            <button type="button" class="btn btn-ghost hidden" id="cancelBtn">Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Transactions -->
+      <section class="panel" aria-labelledby="listTitle">
+        <h2 id="listTitle">Transactions</h2>
+
+        <div class="filters">
+          <div class="field">
+            <label for="filterType">Type</label>
+            <select id="filterType">
+              <option value="all">All</option>
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filterCategory">Category</label>
+            <select id="filterCategory"></select>
+          </div>
+          <button type="button" class="btn btn-ghost btn-small" id="clearFilters">Reset</button>
+        </div>
+
+        <p class="result-count" id="resultCount"></p>
+        <ul class="transaction-list" id="transactionList"></ul>
+        <div class="empty" id="emptyState">No transactions found.</div>
+      </section>
+    </div>
+
+    <!-- Bonus: monthly summary + chart -->
+    <section class="panel summary-panel" aria-labelledby="summaryTitle">
+      <div class="summary-head">
+        <h2 id="summaryTitle">Monthly Summary</h2>
+        <div class="field inline">
+          <label for="summaryMonth">Month</label>
+          <select id="summaryMonth"></select>
+        </div>
+      </div>
+
+      <div class="summary-grid">
+        <div class="summary-stats">
+          <div class="stat"><span>Income</span><strong id="mIncome" class="positive">₹0.00</strong></div>
+          <div class="stat"><span>Expenses</span><strong id="mExpense" class="negative">₹0.00</strong></div>
+          <div class="stat"><span>Net Savings</span><strong id="mNet">₹0.00</strong></div>
+        </div>
+
+        <div class="chart-wrap">
+          <h3>Expenses by Category</h3>
+          <div class="chart-body">
+            <canvas id="categoryChart" aria-label="Category-wise expense chart" role="img"></canvas>
+            <ul class="legend" id="chartLegend"></ul>
+          </div>
+          <p class="empty-chart hidden" id="chartEmpty">No expenses in this period.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">Data is saved in your browser's Local Storage.</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
